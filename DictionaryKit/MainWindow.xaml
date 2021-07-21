@@ -33,6 +33,7 @@
             <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonRemove">删除</Button>
             <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonClear">清空</Button>
             <Separator Height="25"></Separator>
+            <ComboBox x:Name="comboType" IsEditable="False" IsReadOnly="True" Margin="5, 5, 5, 0"></ComboBox>
             <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonSearch">查找</Button>
         </StackPanel>
 
