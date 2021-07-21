@@ -1,0 +1,43 @@
+<Window x:Class="DictionaryKit.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DictionaryKit"
+        mc:Ignorable="d"
+        Title="便携词典" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label HorizontalAlignment="Center" FontSize="15">条件列表</Label>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label HorizontalAlignment="Center" FontSize="15">结果</Label>
+        </StackPanel>
+
+        <ListView Grid.Row="1" Grid.Column="0" Margin="5, 0, 5, 5" x:Name="listConditions" FontSize="15"/>
+
+       <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+            <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonAdd">添加</Button>
+            <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonRemove">删除</Button>
+            <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonClear">清空</Button>
+            <Separator Height="25"></Separator>
+            <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonSearch">查找</Button>
+        </StackPanel>
+
+        <TextBox Grid.Row="1" Grid.Column="3" Margin="5, 0, 5, 5" x:Name="textResult" FontSize="15">
+
+        </TextBox>
+    </Grid>
+</Window>
