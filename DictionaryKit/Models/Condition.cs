@@ -2,6 +2,13 @@ namespace DictionaryKit.Models
 {
     public class Condition
     {
+        public const string Tones = "" +
+            "āōēīū\n" +
+            "áóéíú\n" +
+            "ǎǒěǐǔ\n" +
+            "àòèìù\n" +
+            "aoeiuü";
+
         public enum ConditionType
         {
             Required,
@@ -17,5 +24,10 @@ namespace DictionaryKit.Models
         public ConditionType Type { get; set; }
 
         public string Content { get; set; }
+
+        public override string ToString()
+        {
+            return $"{(ConditionType_Localization)Type} | {Content}";
+        }
     }
 }

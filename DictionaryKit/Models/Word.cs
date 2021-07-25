@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DictionaryKit.Models
 {
-    public class Word
+    public class Word : IChineseObject
     {
         [JsonProperty("word")]
         public string WordContent { get; set; }
@@ -28,5 +28,9 @@ namespace DictionaryKit.Models
         /// </summary>
         [JsonExtensionData]
         public IDictionary<string, object> AdditionalData { get; set; } = new Dictionary<string, object>();
+
+        public string GetSearchContent(bool isStrict) => isStrict ? WordContent + OldWord + Pinyin : $"{WordContent}{OldWord}{Pinyin}{Explanation}";
+
+        public override string ToString() => $"【汉字】{WordContent} ({Pinyin})\n【繁体】{OldWord}\n【解释】\n{Explanation}\n";
     }
 }

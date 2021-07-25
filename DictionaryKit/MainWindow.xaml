@@ -26,18 +26,23 @@
             <Label HorizontalAlignment="Center" FontSize="15">结果</Label>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.Column="0" Margin="5, 0, 5, 5" x:Name="listConditions" FontSize="15"/>
+        <ListView Grid.Row="1" Grid.Column="0" Margin="5, 0, 5, 5" x:Name="listConditions" FontSize="15" />
 
-       <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+            <TextBox Height="80" Margin="5, 0, 5, 5" x:Name="textTones" IsReadOnly="True" HorizontalContentAlignment="Center" FontFamily="Consolas"></TextBox>
             <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonAdd">添加</Button>
             <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonRemove">删除</Button>
             <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonClear">清空</Button>
             <Separator Height="25"></Separator>
             <ComboBox x:Name="comboType" IsEditable="False" IsReadOnly="True" Margin="5, 5, 5, 0"></ComboBox>
+            <StackPanel Margin="5, 5, 5, 0">
+                <RadioButton x:Name="radioGlobal" Content="全局搜索" IsChecked="False"/>
+                <RadioButton x:Name="radioStrict" Content="严格搜索" IsChecked="True" />
+            </StackPanel>
             <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonSearch">查找</Button>
         </StackPanel>
 
-        <TextBox Grid.Row="1" Grid.Column="3" Margin="5, 0, 5, 5" x:Name="textResult" FontSize="15">
+        <TextBox Grid.Row="1" Grid.Column="3" Margin="5, 0, 5, 5" x:Name="textResult" FontSize="15" VerticalScrollBarVisibility="Visible">
 
         </TextBox>
     </Grid>

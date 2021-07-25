@@ -1,3 +1,4 @@
+using DictionaryKit.Models;
 using DictionaryKit.Services;
 using System;
 using System.Collections.Generic;
@@ -25,24 +26,97 @@ namespace DictionaryKit
         {
             InitializeComponent();
 
+            textTones.Text = Models.Condition.Tones;
+
             comboType.ItemsSource = Enum.GetValues(typeof(DataFetcher.DataType_Localization)).Cast<DataFetcher.DataType>();
             comboType.SelectedItem = (DataFetcher.DataType_Localization)DataFetcher.DataType.Word;
 
+            buttonAdd.Click += (sender, e) =>
+            {
+                var conditionDialog = new ConditionDialog()
+                {
+                    Owner = this,
+                };
+
+                if (conditionDialog.ShowDialog() ?? false)
+                {
+                    listConditions.Items.Add(conditionDialog.Result);
+                }
+            };
+
+            buttonRemove.Click += (sender, e) =>
+            {
+                if (listConditions.SelectedItems?.Count > 0)
+                {
+                    while (listConditions.SelectedIndex != -1)
+                    {
+                        listConditions.Items.RemoveAt(listConditions.SelectedIndex);
+                    }
+                }
+            };
+
+            buttonClear.Click += (sender, e) =>
+            {
+                listConditions.Items.Clear();
+            };
+
             buttonSearch.Click += (sender, e) =>
             {
+                var queryableConditions = listConditions.Items.Cast<Models.Condition>();
+
+                var requireds = queryableConditions
+                    .Where(c => c.Type == Models.Condition.ConditionType.Required)
+                    .Select(c => c.Content)
+                    .ToList();
+
+                var optionals = queryableConditions
+                    .Where(c => c.Type == Models.Condition.ConditionType.Optional)
+                    .Select(c => c.Content)
+                    .ToList();
+
+                var contentPool = new List<IChineseObject>();
+
                 switch ((DataFetcher.DataType)comboType.SelectedItem)
                 {
                     case DataFetcher.DataType.Ci:
+                        contentPool.AddRange(DataFetcher.GetCis());
                         break;
                     case DataFetcher.DataType.Idiom:
+                        contentPool.AddRange(DataFetcher.GetIdioms());
                         break;
                     case DataFetcher.DataType.Word:
+                        contentPool.AddRange(DataFetcher.GetWords());
                         break;
                     case DataFetcher.DataType.Xiehouyu:
+                        contentPool.AddRange(DataFetcher.GetXiehouyus());
                         break;
                     default:
                         break;
                 }
+
+                var result = contentPool
+                    .Where(ch =>
+                    {
+                        foreach (var condition in requireds)
+                        {
+                            if (!ch.GetSearchContent(radioStrict.IsChecked ?? false).Contains(condition))
+                                return false;
+                        }
+                        bool flag = optionals.Count == 0;
+
+                        foreach (var condition in optionals)
+                        {
+                            if (ch.GetSearchContent(radioStrict.IsChecked ?? false).Contains(condition))
+                            {
+                                flag = true;
+                                break;
+                            }
+                        }
+
+                        return flag;
+                    });
+
+                textResult.Text = string.Join("\n====================================\n\n", result);
             };
         }
     }

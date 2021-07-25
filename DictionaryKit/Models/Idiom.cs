@@ -5,7 +5,7 @@ namespace DictionaryKit.Models
     /// <summary>
     /// 成语
     /// </summary>
-    public class Idiom
+    public class Idiom : IChineseObject
     {
         /// <summary>
         /// 出处
@@ -42,5 +42,9 @@ namespace DictionaryKit.Models
         /// </summary>
         [JsonProperty("abbreviation")]
         public string Abbreviation { get; set; }
+
+        public string GetSearchContent(bool isStrict) => isStrict ? Word + Pinyin : $"{Pinyin}{Word}{Explanation}";
+
+        public override string ToString() => $"【成语】{Word} ({Pinyin})\n【出处】\n{Derivation}\n【解释】\n{Explanation}\n【示例】\n{Example}\n";
     }
 }
