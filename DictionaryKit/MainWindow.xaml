@@ -40,6 +40,8 @@
                 <RadioButton x:Name="radioStrict" Content="严格搜索" IsChecked="True" />
             </StackPanel>
             <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonSearch">查找</Button>
+            <Separator Height="25"></Separator>
+            <Button Height="25" Margin="5, 5, 5, 0" x:Name="buttonExport">导出</Button>
         </StackPanel>
 
         <TextBox Grid.Row="1" Grid.Column="3" Margin="5, 0, 5, 5" x:Name="textResult" FontSize="15" VerticalScrollBarVisibility="Visible">

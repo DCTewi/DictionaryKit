@@ -1,7 +1,9 @@
 using DictionaryKit.Models;
 using DictionaryKit.Services;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -117,6 +119,21 @@ namespace DictionaryKit
                     });
 
                 textResult.Text = string.Join("\n====================================\n\n", result);
+            };
+
+            buttonExport.Click += (sender, e) =>
+            {
+                SaveFileDialog saveDialog = new SaveFileDialog()
+                {
+                    DefaultExt = "exe",
+                    FileName = "Dictionary Export",
+                    Filter = "Text file (*.txt)|*.txt",
+                };
+
+                if (saveDialog.ShowDialog() ?? false)
+                {
+                    File.WriteAllText(saveDialog.FileName, textResult.Text);
+                }
             };
         }
     }
